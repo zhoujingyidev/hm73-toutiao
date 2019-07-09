@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <h1>测试</h1>
+    <!-- 一级标题渲染的位置 -->
+    <router-view></router-view>
   </div>
 </template>
 
@@ -11,10 +12,6 @@ export default {
 }
 </script>
 
-<style lang="less">
-  #app{
-    h1{
-      color:red;
-    }
-  }
+<style>
+
 </style>
