@@ -1,13 +1,15 @@
 <template>
   <el-container class="home-container">
-    <el-aside class="my-aside" width="200px">
-      <div class="logo"></div>
+    <el-aside class="my-aside" :width="collapse?'64px':'200px'">
+      <div class="logo" :class="{close:collapse}"></div>
       <el-menu
         default-active="1"
         background-color="#002033"
         text-color="#fff"
         active-text-color="#ffd04b"
         style="border-right:none"
+        :collapse="collapse"
+        :collapse-transition="false"
       >
         <el-menu-item index="1">
           <i class="el-icon-menu"></i>
@@ -41,12 +43,12 @@
     </el-aside>
     <el-container>
       <el-header class="my-header">
-        <span class="el-icon-s-fold"></span>
+        <span class="el-icon-s-fold" @click="toggleMenu()"></span>
         <span class="text">江苏传智播客教育科技有限公司</span>
         <el-dropdown style="float:right">
           <span class="el-dropdown-link">
             <img
-              style="vertical-align:middle"
+              style="vertical-align:middle;margin-right:5px"
               width="30"
               height="30"
               src="../../assets/images/avatar.jpg"
@@ -61,13 +63,26 @@
           </el-dropdown-menu>
         </el-dropdown>
       </el-header>
-      <el-main>Main</el-main>
+      <el-main>
+          <router-view></router-view>
+      </el-main>
     </el-container>
   </el-container>
 </template>
 
 <script>
-export default {};
+export default {
+    data() {
+        return {
+            collapse: false
+        }
+    },
+    methods:{
+        toggleMenu () {
+            this.collapse = !this.collapse
+        }
+    }
+};
 </script>
 
 <style scoped lang='less'>
@@ -85,6 +100,9 @@ export default {};
       background: #002840 url(../../assets/images/logo_admin.png) no-repeat
         center / 140px auto;
     }
+    .close {
+        background: url(../../assets/images/logo_admin_01.png) no-repeat center / 38px auto;
+    }
   }
   .my-header {
     line-height: 60px;
@@ -92,7 +110,7 @@ export default {};
     .el-icon-s-fold {
       font-size: 26px;
       vertical-align: middle;
-      margin-right: 5px;
+      margin-right: 8px;
     }
     .text {
         vertical-align: middle;
