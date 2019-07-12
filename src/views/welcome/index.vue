@@ -1,15 +1,12 @@
 <template>
-    <div class="container">
-        <img src="../../assets/images/welcome.jpg" alt="">
-    </div>
+  <div class="container">
+    <img src="../../assets/images/welcome.jpg" alt />
+  </div>
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
-<style>
-
+<style scoped lang='less'>
 </style>
