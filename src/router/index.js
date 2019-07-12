@@ -30,5 +30,10 @@ const router = new VueRouter({
 		}
 	]
 })
-
+// 注册一个全局的前置导航守卫
+router.beforeEach((to,from,next) => {
+	const user = window.sessionStorage.getItem('hm73-toutiao')
+	if(to.path !== '/login' && !user) return next('/login')
+	next()
+})
 export default router

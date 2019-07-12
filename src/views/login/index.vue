@@ -74,6 +74,8 @@ export default {
             .then(res => {
               //res 是响应对象 包含响应数据
               const data = res.data
+              window.sessionStorage.setItem('hm73-toutiao',JSON.stringify(res.data.data))
+              this.$router.push('/')
             })
             .catch(() => {
               //提示错误
