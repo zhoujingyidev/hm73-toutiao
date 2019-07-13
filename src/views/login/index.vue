@@ -68,7 +68,7 @@ export default {
           //如果校验成功 进行登录
           this.$http
             .post(
-              'http://ttapi.research.itcast.cn/mp/v1_0/authorizations',
+              'authorizations',
               this.loginForm
             )
             .then(res => {
