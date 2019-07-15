@@ -5,6 +5,7 @@ import Login from '@/views/login'
 import Home from '@/views/home'
 import Welcome from '@/views/welcome'
 import NotFound from '@/views/404'
+import Article from '@/views/article'
 
 Vue.use(VueRouter)
 
@@ -18,10 +19,16 @@ const router = new VueRouter({
 			path: '/',
 			component: Home,
 			children: [{
-				path: '/',
-				name: 'welcome',
-				component: Welcome
-			}]
+					path: '/',
+					name: 'welcome',
+					component: Welcome
+				},
+				{
+					path: '/article',
+					name: 'article',
+					component: Article
+				}
+			]
 		},
 		{
 			path: '*',
@@ -31,9 +38,9 @@ const router = new VueRouter({
 	]
 })
 // 注册一个全局的前置导航守卫
-router.beforeEach((to,from,next) => {
+router.beforeEach((to, from, next) => {
 	const user = window.sessionStorage.getItem('hm73-toutiao')
-	if(to.path !== '/login' && !user) return next('/login')
+	if (to.path !== '/login' && !user) return next('/login')
 	next()
 })
 export default router

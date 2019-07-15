@@ -3,7 +3,7 @@
     <!-- 卡片 -->
     <el-card class="login-box">
       <img src="../../assets/images/logo_index.png" />
-     
+
       <el-form ref="loginForm" status-icon :model="loginForm" :rules="loginRules">
         <el-form-item prop="mobile">
           <el-input v-model="loginForm.mobile" placeholder="请输入手机号"></el-input>
@@ -13,9 +13,8 @@
           <el-button style="float:right">发送验证码</el-button>
         </el-form-item>
         <el-form-item>
-          <el-checkbox v-model="checked" style="margin:0 10px 0 20px"></el-checkbox>
-          我已阅读并同意 
-          <el-link class="login-link" type="primary" :underline="false">用户协议</el-link> 和 
+          <el-checkbox v-model="checked" style="margin:0 10px 0 20px"></el-checkbox>我已阅读并同意
+          <el-link class="login-link" type="primary" :underline="false">用户协议</el-link>和
           <el-link class="login-link" type="primary" :underline="false">隐私条款</el-link>
         </el-form-item>
         <el-form-item>
@@ -28,64 +27,58 @@
 
 <script>
 export default {
-  data () {
+  data() {
     // 校验手机号的
     const checkMobile = (rule, value, callback) => {
       // 校验逻辑
       if (/^1[3-9]\d{9}$/.test(value)) {
-        callback()
+        callback();
       } else {
-        callback(new Error('手机号格式不对'))
+        callback(new Error("手机号格式不对"));
       }
-    }
+    };
     return {
       //表单对应的对象
       loginForm: {
-        mobile:'15935701590',
-        code:'246810',
+        mobile: "15935701590",
+        code: "246810"
       },
       //表单的校验规则
       loginRules: {
         mobile: [
           //具体校验的规则
-          { required: true, message: '请输入手机号', trigger: 'blur' },
-          { validator: checkMobile, trigger: 'blur' }
+          { required: true, message: "请输入手机号", trigger: "blur" },
+          { validator: checkMobile, trigger: "blur" }
         ],
         code: [
-          { required: true, message: '请输入验证码', trigger: 'blur' },
-          { len: 6, message: '必须是6位', trigger: 'blur' }
+          { required: true, message: "请输入验证码", trigger: "blur" },
+          { len: 6, message: "必须是6位", trigger: "blur" }
         ]
       },
       //默认选中复选框
       checked: true
-    }
+    };
   },
   methods: {
-    login () {
+    login() {
       //整体表单的校验
-      this.$refs.loginForm.validate((valid) => {
+      this.$refs.loginForm.validate(async valid => {
         if (valid) {
-          //如果校验成功 进行登录
-          this.$http
-            .post(
-              'authorizations',
-              this.loginForm
-            )
-            .then(res => {
-              //res 是响应对象 包含响应数据
-              const data = res.data
-              window.sessionStorage.setItem('hm73-toutiao',JSON.stringify(res.data.data))
-              this.$router.push('/')
-            })
-            .catch(() => {
-              //提示错误
-              this.$message.error('用户名或密码错误')
-            })
+          try {
+            const res = await this.$http.post("authorizations", this.loginForm);
+            window.sessionStorage.setItem(
+              "hm73-toutiao",
+              JSON.stringify(res.data.data)
+            );
+            this.$router.push("/");
+          } catch (err) {
+            this.$message.error("用户名或密码错误");
+          }
         }
-      })
+      });
     }
   }
-}
+};
 </script>
 
 <style scoped lang='less'>
@@ -110,7 +103,7 @@ export default {
     }
   }
 }
-.login-link{
+.login-link {
   display: inline-block;
   height: 44px;
 }

@@ -3,7 +3,7 @@
     <el-aside class="my-aside" :width="collapse?'64px':'200px'">
       <div class="logo" :class="{close:collapse}"></div>
       <el-menu
-        default-active="/"
+        default-active="$router.path"
         background-color="#002033"
         text-color="#fff"
         active-text-color="#ffd04b"
