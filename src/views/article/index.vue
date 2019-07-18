@@ -50,7 +50,7 @@
           </template>
         </el-table-column>
         <el-table-column prop="title" label="标题"></el-table-column>
-        <el-table-column prop="status" label="状态">
+        <el-table-column label="状态">
           <template slot-scope="scope">
             <el-tag v-if="scope.row.status===0" type="info">草稿</el-tag>
             <el-tag v-if="scope.row.status===1">待审核</el-tag>
@@ -149,6 +149,9 @@ export default {
       } = await this.$http.get("articles", { params: this.reqParams });
       this.articles = data.results;
       this.total = data.total_count
+      console.log(data)
+      console.log(this.reqParams)
+      
     }
   }
 };

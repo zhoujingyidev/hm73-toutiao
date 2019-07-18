@@ -5,6 +5,9 @@ import App from './App.vue'
 import router from '@/router'
 import axios from '@/api/axios'
 import components from '@/components'
+//引入全局样式
+import '@/styles/index.less'
+
 
 Vue.use(components)
 Vue.prototype.$http = axios
