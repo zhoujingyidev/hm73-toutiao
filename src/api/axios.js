@@ -34,7 +34,7 @@ instance.interceptors.response.use(response => {
     return response
 },(error) => {
     //如果响应状态码是 401 拦截到登录页面
-    if(error.response.status === 401) {
+    if(error.response && error.response.status === 401) {
         location.hash = '#/login'
     }
     return Promise.reject(error)
